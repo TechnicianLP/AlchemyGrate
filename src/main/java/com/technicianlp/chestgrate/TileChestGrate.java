@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.common.lib.crafting.ThaumcraftCraftingManager;
 import thaumcraft.common.tiles.TileAlchemyFurnaceAdvanced;
@@ -17,17 +18,20 @@ public class TileChestGrate extends TileEntity implements IInventory {
 
     @Override
     public void updateEntity() {
-        if (this.worldObj.isRemote)
-            return;
+        if (this.worldObj.isRemote) return;
         TileEntity below = this.worldObj.getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
-        if (below instanceof TileAlchemyFurnaceAdvanced) {
-            TileAlchemyFurnaceAdvanced furnace = (TileAlchemyFurnaceAdvanced) below;
+        if (below instanceof TileAlchemyFurnaceAdvanced furnace) {
             for (int i = 0; i < this.contents.length; i++) {
-                if (this.contents[i] == null)
-                    continue;
+                if (this.contents[i] == null) continue;
                 if (furnace.process(this.contents[i])) {
                     this.decrStackSize(i, 1);
-                    this.worldObj.playSoundEffect(this.xCoord, this.yCoord - 1, this.zCoord, "thaumcraft:bubble", 0.2F, 1.0F + this.worldObj.rand.nextFloat() * 0.4F);
+                    this.worldObj.playSoundEffect(
+                        this.xCoord,
+                        this.yCoord - 1,
+                        this.zCoord,
+                        "thaumcraft:bubble",
+                        0.2F,
+                        1.0F + this.worldObj.rand.nextFloat() * 0.4F);
                     break;
                 }
             }
@@ -41,8 +45,7 @@ public class TileChestGrate extends TileEntity implements IInventory {
 
     @Override
     public ItemStack getStackInSlot(int index) {
-        if (index < 0 || index >= this.getSizeInventory())
-            return null;
+        if (index < 0 || index >= this.getSizeInventory()) return null;
         return this.contents[index];
     }
 
@@ -75,14 +78,12 @@ public class TileChestGrate extends TileEntity implements IInventory {
 
     @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
-        if (index < 0 || index >= this.getSizeInventory())
-            return;
+        if (index < 0 || index >= this.getSizeInventory()) return;
 
         if (stack != null && stack.stackSize > this.getInventoryStackLimit())
             stack.stackSize = this.getInventoryStackLimit();
 
-        if (stack != null && stack.stackSize == 0)
-            stack = null;
+        if (stack != null && stack.stackSize == 0) stack = null;
 
         this.contents[index] = stack;
         this.markDirty();
@@ -99,14 +100,13 @@ public class TileChestGrate extends TileEntity implements IInventory {
         return al.size() != 0;
     }
 
-
     @Override
     public String getInventoryName() {
-        return this.isCustomInventoryName() ? this.customName : "container.alchgrate";
+        return this.hasCustomInventoryName() ? this.customName : "container.alchgrate";
     }
 
     @Override
-    public boolean isCustomInventoryName() {
+    public boolean hasCustomInventoryName() {
         return this.customName != null && !this.customName.equals("");
     }
 
@@ -121,12 +121,10 @@ public class TileChestGrate extends TileEntity implements IInventory {
     }
 
     @Override
-    public void openChest() {
-    }
+    public void openInventory() {}
 
     @Override
-    public void closeChest() {
-    }
+    public void closeInventory() {}
 
     @Override
     public void writeToNBT(NBTTagCompound nbt) {
@@ -137,17 +135,17 @@ public class TileChestGrate extends TileEntity implements IInventory {
             if (this.getStackInSlot(i) != null) {
                 NBTTagCompound stackTag = new NBTTagCompound();
                 stackTag.setByte("Slot", (byte) i);
-                this.getStackInSlot(i).writeToNBT(stackTag);
+                this.getStackInSlot(i)
+                    .writeToNBT(stackTag);
                 list.appendTag(stackTag);
             }
         }
         nbt.setTag("Items", list);
 
-        if (this.isCustomInventoryName()) {
+        if (this.hasCustomInventoryName()) {
             nbt.setString("CustomName", this.customName);
         }
     }
-
 
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
