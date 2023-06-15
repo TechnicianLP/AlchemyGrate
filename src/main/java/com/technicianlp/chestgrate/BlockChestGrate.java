@@ -30,8 +30,8 @@ public class BlockChestGrate extends Block {
         this.setStepSound(Block.soundTypeMetal);
         this.setCreativeTab(Thaumcraft.tabTC);
         this.setBlockBounds(0.0F, 0.8125F, 0.0F, 1.0F, 1.0F, 1.0F);
-        this.setUnlocalizedName("alchgrate");
-        this.setTextureName("alchgrate:alchgrate");
+        this.setBlockName("alchgrate");
+        this.setBlockTextureName("alchgrate:alchgrate");
     }
 
     @Override
@@ -44,8 +44,11 @@ public class BlockChestGrate extends Block {
         return Container.calcRedstoneFromInventory((IInventory) world.getTileEntity(x, y, z));
     }
 
+    /**
+     * {@code isFullBlock}
+     */
     @Override
-    public boolean isFullBlock() {
+    public boolean func_149730_j() {
         return false;
     }
 
