@@ -1,9 +1,21 @@
-[
 {
-  "modid": "alchgrate",
-  "name": "Alchemy Grate",
-  "version": "1.0",
-  "mcversion": "[1.7.10]",
-  "authorList": ["TechnicianLP"]
+	"modListVersion": 2,
+	"modList": [{
+		"modid": "${modId}",
+		"name": "${modName}",
+		"description": "",
+		"version": "${modVersion}",
+		"mcversion": "${minecraftVersion}",
+		"url": "",
+		"updateUrl": "",
+		"authorList": ["TechnicianLP"],
+		"credits": "",
+		"logoFile": "",
+		"screenshots": [],
+		"parent": "",
+		"requiredMods": [],
+		"dependencies": [],
+		"dependants": [],
+		"useDependencyInformation": true
+	}]
 }
-]
