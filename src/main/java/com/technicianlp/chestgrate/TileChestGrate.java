@@ -20,8 +20,7 @@ public class TileChestGrate extends TileEntity implements IInventory {
         if (this.worldObj.isRemote)
             return;
         TileEntity below = this.worldObj.getTileEntity(this.xCoord, this.yCoord - 1, this.zCoord);
-        if (below instanceof TileAlchemyFurnaceAdvanced) {
-            TileAlchemyFurnaceAdvanced furnace = (TileAlchemyFurnaceAdvanced) below;
+        if (below instanceof TileAlchemyFurnaceAdvanced furnace) {
             for (int i = 0; i < this.contents.length; i++) {
                 if (this.contents[i] == null)
                     continue;
