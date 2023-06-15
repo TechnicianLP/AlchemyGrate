@@ -1,7 +1,7 @@
 package com.technicianlp.chestgrate;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -14,10 +14,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import thaumcraft.common.Thaumcraft;
 import thaumcraft.common.config.ConfigBlocks;
-
-import java.util.Random;
 
 public class BlockChestGrate extends Block {
 
@@ -82,7 +83,8 @@ public class BlockChestGrate extends Block {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float subX, float subY, float subZ) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float subX,
+        float subY, float subZ) {
         if (!world.isRemote) {
             player.openGui(Main.instance, GuiHandler.CONTAINER, world, x, y, z);
         }
@@ -110,7 +112,12 @@ public class BlockChestGrate extends Block {
                     float yOff = this.random.nextFloat() * 0.8F + 0.1F;
                     float zOff = this.random.nextFloat() * 0.8F + 0.1F;
 
-                    EntityItem entityitem = new EntityItem(world, (float) x + xOff, (float) y + yOff, (float) z + zOff, itemstack);
+                    EntityItem entityitem = new EntityItem(
+                        world,
+                        (float) x + xOff,
+                        (float) y + yOff,
+                        (float) z + zOff,
+                        itemstack);
 
                     entityitem.motionX = (float) this.random.nextGaussian() * 0.05f;
                     entityitem.motionY = (float) this.random.nextGaussian() * 0.05f + 0.2F;

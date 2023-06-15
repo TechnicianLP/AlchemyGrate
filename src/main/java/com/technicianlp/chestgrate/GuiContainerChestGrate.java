@@ -4,6 +4,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 public class GuiContainerChestGrate extends GuiContainer {
@@ -21,14 +22,25 @@ public class GuiContainerChestGrate extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        this.fontRendererObj.drawString(this.tile.hasCustomInventoryName() ? this.tile.getInventoryName() : I18n.format(this.tile.getInventoryName()), 8, 6, 0x404040);
-        this.fontRendererObj.drawString(this.player.hasCustomInventoryName() ? this.player.getInventoryName() : I18n.format(this.player.getInventoryName()), 8, this.ySize - 96 + 2, 0x404040);
+        this.fontRendererObj.drawString(
+            this.tile.hasCustomInventoryName() ? this.tile.getInventoryName()
+                : I18n.format(this.tile.getInventoryName()),
+            8,
+            6,
+            0x404040);
+        this.fontRendererObj.drawString(
+            this.player.hasCustomInventoryName() ? this.player.getInventoryName()
+                : I18n.format(this.player.getInventoryName()),
+            8,
+            this.ySize - 96 + 2,
+            0x404040);
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.getTextureManager().bindTexture(background);
+        this.mc.getTextureManager()
+            .bindTexture(background);
         int k = (this.width - this.xSize) / 2;
         int l = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);

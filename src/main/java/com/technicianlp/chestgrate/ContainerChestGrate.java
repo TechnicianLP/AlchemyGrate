@@ -58,8 +58,7 @@ public class ContainerChestGrate extends Container {
                 slot.onSlotChanged();
             }
 
-            if (current.stackSize == previous.stackSize)
-                return null;
+            if (current.stackSize == previous.stackSize) return null;
             slot.onPickupFromSlot(player, current);
         }
 
